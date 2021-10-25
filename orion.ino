@@ -1,11 +1,15 @@
-int pin = 2;
+#include "BluetoothSerial.h" 
+BluetoothSerial ORION;
+char recive;
 
 void setup() {
-  pinMode(pin, OUTPUT);
+  Serial.begin(115200);
+  ORION.begin("ORION");
 }
 void loop() {
-  digitalWrite(pin, HIGH);
-  delay(1000);
-  digitalWrite(pin, LOW);
-  delay(1000);
+  if (ORION.available()){
+    recive = ORION.read();
+    Serial.print("Received:");
+    Serial.println(recive);
+  }
 }
