@@ -30,23 +30,31 @@ void setup() {
   pinMode(lf_kanan, OUTPUT);
   pinMode(rb_kanan, OUTPUT);
   pinMode(lb_kanan, OUTPUT);
-
-  pinMode(enf_kiri, OUTPUT);
-  pinMode(enb_kiri, OUTPUT);
-  pinMode(enf_kanan, OUTPUT);
-  pinMode(enb_kanan, OUTPUT);
 }
 void loop() {
-      digitalWrite (enf_kiri, LOW);
+  if (ORION.available()){
+    recive = ORION.read();
+    Serial.print("Received:");
+    Serial.println(recive);
+    if (recive == 'S'){
+      digitalWrite (rf_kiri, LOW);
+      digitalWrite (lf_kiri, LOW);
+      digitalWrite (rb_kiri, LOW);
+      digitalWrite (lb_kiri, LOW);
+      digitalWrite (rf_kanan, LOW);
+      digitalWrite (lf_kanan, LOW);
+      digitalWrite (rb_kanan, LOW);
+      digitalWrite (lb_kanan, LOW);
+    }
+    if (recive == 'F'){
       digitalWrite (rf_kiri, HIGH);
-      digitalWrite (lf_kiri, HIGH);
+      digitalWrite (lf_kiri, LOW);
       digitalWrite (rb_kiri, HIGH);
-      digitalWrite (lb_kiri, HIGH);
-      digitalWrite (enb_kiri, HIGH);
-      digitalWrite (enf_kanan, HIGH);
+      digitalWrite (lb_kiri, LOW);
       digitalWrite (rf_kanan, HIGH);
-      digitalWrite (lf_kanan, HIGH);
+      digitalWrite (lf_kanan, LOW);
       digitalWrite (rb_kanan, HIGH);
-      digitalWrite (lb_kanan, HIGH);
-      digitalWrite (enb_kanan, HIGH);
+      digitalWrite (lb_kanan, LOW);
+    }
+  }
 }
